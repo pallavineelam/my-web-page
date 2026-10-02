@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOVA CART – Local stores, delivered fairly</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3ec;--card:#fff;--ink:#14231c;--mute:#5d6b63;--leaf:#1f7a4d;--sun:#f2a900;--red:#c93c3c;--line:#d5ded6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a15;--card:#1a2720;--ink:#eaf2ec;--mute:#9db0a4;--leaf:#4cc386;--line:#2b3b32}}
+:root[data-theme="dark"]{--bg:#101a15;--card:#1a2720;--ink:#eaf2ec;--mute:#9db0a4;--leaf:#4cc386;--line:#2b3b32}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 'Bricolage Grotesque',system-ui,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ink);color:var(--bg);padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header b{font-size:22px;font-weight:800;letter-spacing:-.5px}header b i{color:var(--sun);font-style:normal}
+nav{display:flex;gap:4px;overflow-x:auto;flex:1}
+nav button{background:none;border:0;color:inherit;font:600 14px inherit;font-family:inherit;padding:8px 12px;border-radius:99px;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--sun);color:#14231c}
+main{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:clamp(28px,6vw,46px);line-height:1.05;margin:8px 0;font-weight:800;letter-spacing:-1px}
+h2{margin:0 0 8px;font-size:22px}
+.sub{color:var(--mute);margin:0 0 16px;max-width:60ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.prod{display:flex;flex-direction:column;gap:2px}
+.prod .e{font-size:34px}.prod small{color:var(--mute)}
+.stale{color:var(--red)}
+button.btn{background:var(--leaf);color:#fff;border:0;border-radius:10px;padding:9px 14px;font:600 14px inherit;font-family:inherit;cursor:pointer}
+button.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button.btn:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg)}
+.bar{height:12px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--sun);transition:width .4s}
+.tot div{display:flex;justify-content:space-between;padding:2px 0}.tot .g{font-weight:800;font-size:19px;border-top:1px dashed var(--line);margin-top:6px;padding-top:6px}
+.tag{display:inline-block;background:var(--sun);color:#14231c;border-radius:6px;padding:1px 8px;font-size:13px;font-weight:600}
+.late{background:var(--red);color:#fff}
+svg text{fill:var(--ink);font:600 12px 'Bricolage Grotesque',sans-serif}
+.chat{max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.m{padding:6px 10px;border-radius:12px;max-width:80%;font-size:14px}.m.me{background:var(--leaf);color:#fff;align-self:flex-end}.m.them{background:var(--line)}
+input,textarea,select{font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.wheelbox{position:relative;width:260px;height:260px;margin:14px auto}
+.wheel{width:100%;height:100%;border-radius:50%;border:6px solid var(--ink);position:relative;transition:transform 4s cubic-bezier(.15,.7,.1,1);background:conic-gradient(#f2a900 0 60deg,#1f7a4d 0 120deg,#e8d28a 0 180deg,#5bb98a 0 240deg,#f2a900 0 300deg,#1f7a4d 0 360deg)}
+.wheel span{position:absolute;left:50%;top:50%;width:90px;margin-left:-45px;margin-top:-118px;height:100px;text-align:center;font:800 13px/1.15 'Bricolage Grotesque',sans-serif;color:#14231c;transform-origin:45px 118px;padding-top:6px}
+.ptr{position:absolute;left:50%;top:-12px;margin-left:-11px;border:11px solid transparent;border-top:20px solid var(--red);z-index:2}
+.hero{background:var(--leaf);color:#fff;border-radius:18px;padding:22px;margin-bottom:14px}
+.hero p{max-width:55ch;margin:6px 0 14px}.hero .btn{background:var(--sun);color:#14231c}
+.stars button{background:none;border:0;font-size:30px;cursor:pointer;color:var(--line);padding:0 2px}.stars button.on{color:var(--sun)}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){.wheel,.bar i{transition:none}}
+</style></head><body>
+<header><b>NOVA<i>CART</i></b>
+<nav id="nav"></nav></header>
+<main>
+
+<section id="shop">
+<div class="hero"><h1>Your neighbourhood, delivered fairly.</h1>
+<p>Fresh from 620 local stores. Every item shows how recently its store updated stock, a late order automatically gets 25% off, and every 5th order earns a lucky draw.</p>
+<button class="btn" onclick="go('rewards')">See rewards</button></div>
+<div class="chips" id="cats"></div>
+<div class="grid" id="prods"></div>
+</section>
+
+<section id="cart" class="hide"><h2>Your cart</h2><div id="cartBody"></div></section>
+
+<section id="track" class="hide"><h2>Live order tracking</h2><div id="trackBody"></div></section>
+
+<section id="rewards" class="hide">
+<h2>Rewards &amp; lucky draw</h2>
+<p class="sub">Order 5 times and spin for a discount on your next order. Regular customers get rewarded, not just first-timers.</p>
+<div class="card"><div class="row"><b id="rwTxt"></b><span id="rwNum"></span></div><div class="bar"><i id="rwBar"></i></div></div>
+<div class="card" style="text-align:center">
+<div class="wheelbox"><div class="ptr"></div><div class="wheel" id="wheel"></div></div>
+<button class="btn" id="spinBtn" onclick="spin()">Spin the wheel</button>
+<p class="sub" id="spinMsg" style="margin:10px auto 0"></p></div>
+<div class="card"><h2>Your coupons</h2><div id="coupList"></div></div>
+</section>
+
+<section id="reviews" class="hide"><h2>Ratings &amp; reviews</h2><div id="revList"></div></section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const P=[
+{id:1,n:'Full-cream milk 1L',e:'🥛',p:62,s:'Sharma Dairy',q:14,u:12,c:'Grocery'},
+{id:2,n:'Brown bread',e:'🍞',p:45,s:'Oven Fresh Bakery',q:6,u:20,c:'Bakery'},
+{id:3,n:'Tomatoes 1kg',e:'🍅',p:38,s:'Green Basket',q:22,u:35,c:'Grocery'},
+{id:4,n:'Basmati rice 5kg',e:'🍚',p:520,s:'Gupta Kirana',q:0,u:2880,c:'Grocery'},
+{id:5,n:'Paracetamol strip',e:'💊',p:28,s:'City Pharmacy',q:40,u:8,c:'Pharmacy'},
+{id:6,n:'Notebook (pack of 4)',e:'📓',p:160,s:'Page One Stationers',q:9,u:60,c:'Stationery'},
+{id:7,n:'Butter croissant',e:'🥐',p:55,s:'Oven Fresh Bakery',q:3,u:15,c:'Bakery'},
+{id:8,n:'Atta 5kg',e:'🌾',p:245,s:'Gupta Kirana',q:11,u:600,c:'Grocery'},
+{id:9,n:'Hand sanitiser',e:'🧴',p:79,s:'City Pharmacy',q:25,u:30,c:'Pharmacy'},
+{id:10,n:'Gel pens (10)',e:'🖊️',p:90,s:'Page One Stationers',q:18,u:45,c:'Stationery'},
+{id:11,n:'Paneer 200g',e:'🧀',p:88,s:'Sharma Dairy',q:5,u:12,c:'Grocery'},
+{id:12,n:'Bananas (dozen)',e:'🍌',p:60,s:'Green Basket',q:0,u:240,c:'Grocery'}];
+const PRIZES=[{l:'10% off',t:'pct',v:10},{l:'₹50 off',t:'flat',v:50},{l:'Free delivery',t:'ship',v:0},{l:'15% off',t:'pct',v:15},{l:'₹100 off',t:'flat',v:100},{l:'₹20 off',t:'flat',v:20}];
+let S={cart:{},done:0,spins:0,coupons:[],reviews:[{n:'Aarti',r:5,t:'Milk and bread arrived warm and fresh. Partner was polite.',d:'Ravi K.'}],wallet:0,order:null,cat:'All',pick:''};
+try{const x=localStorage.getItem('nova');if(x)S=Object.assign(S,JSON.parse(x))}catch(e){}
+const save=()=>{try{localStorage.setItem('nova',JSON.stringify(S))}catch(e){}};
+let timer=null,slow=false;
+
+const tabs=[['shop','Shop'],['cart','Cart'],['track','Track'],['rewards','Rewards'],['reviews','Reviews']];
+function go(t){tabs.forEach(([k])=>$(k).classList.toggle('hide',k!==t));renderNav(t);({cart:rCart,track:rTrack,rewards:rRewards,reviews:rRev})[t]?.();scrollTo(0,0)}
+function renderNav(a){const n=Object.values(S.cart).reduce((x,y)=>x+y,0);$('nav').innerHTML=tabs.map(([k,l])=>`<button class="${k===a?'on':''}" onclick="go('${k}')">${l}${k==='cart'&&n?' ('+n+')':''}</button>`).join('')}
+
+function rShop(){const cs=['All',...new Set(P.map(p=>p.c))];
+$('cats').innerHTML=cs.map(c=>`<button class="chip ${S.cat===c?'on':''}" onclick="S.cat='${c}';rShop()">${c}</button>`).join('');
+$('prods').innerHTML=P.filter(p=>S.cat==='All'||p.c===S.cat).map(p=>{const out=p.q-(S.cart[p.id]||0)<=0;const st=p.u>180;
+return `<div class="card prod"><div class="e">${p.e}</div><b>${p.n}</b><small>${p.s}</small><div><b>₹${p.p}</b></div>
+<small class="${st?'stale':''}">${p.q===0?'Out of stock':p.q<=5?'Only '+p.q+' left':'In stock'} · checked ${p.u<60?p.u+' min':Math.round(p.u/60)+' h'} ago${st?' ⚠':''}</small>
+<button class="btn" ${out?'disabled':''} onclick="add(${p.id})">${out?'Unavailable':'Add'}</button></div>`}).join('')}
+function add(id){S.cart[id]=(S.cart[id]||0)+1;save();rShop();renderNav('shop')}
+function chg(id,d){const p=P.find(x=>x.id==id);S.cart[id]=Math.min(p.q,(S.cart[id]||0)+d);if(S.cart[id]<=0)delete S.cart[id];save();rCart();renderNav('cart')}
+
+function calc(){const items=Object.entries(S.cart).map(([id,q])=>({p:P.find(x=>x.id==id),q}));
+const sub=items.reduce((a,i)=>a+i.p.p*i.q,0);let fee=sub>=299||!sub?0:25;let off=0;
+const c=S.coupons.find(x=>x.id===S.pick);
+if(c){if(c.t==='pct')off=Math.round(sub*c.v/100);if(c.t==='flat')off=Math.min(c.v,sub);if(c.t==='ship')fee=0}
+const wal=Math.min(S.wallet,sub+fee-off);return{items,sub,fee,off,wal,tot:sub+fee-off-wal,c}}
+function rCart(){const k=calc();
+if(!k.items.length){$('cartBody').innerHTML='<div class="card">Your cart is empty. Add items from the shop.<br><br><button class="btn" onclick="go(\'shop\')">Browse products</button></div>';return}
+$('cartBody').innerHTML=`<div class="card">${k.items.map(i=>`<div class="row" style="padding:6px 0"><span>${i.p.e} ${i.p.n}<br><small style="color:var(--mute)">${i.p.s}</small></span><span><button class="btn alt" onclick="chg(${i.p.id},-1)">−</button> ${i.q} <button class="btn alt" onclick="chg(${i.p.id},1)">+</button> ₹${i.p.p*i.q}</span></div>`).join('')}</div>
+<div class="card"><label>Apply a reward coupon<select onchange="S.pick=this.value;rCart()"><option value="">None</option>${S.coupons.map(c=>`<option value="${c.id}" ${c.id===S.pick?'selected':''}>${c.l}</option>`).join('')}</select></label></div>
+<div class="card tot"><div><span>Items</span><span>₹${k.sub}</span></div><div><span>Delivery (free over ₹299)</span><span>₹${k.fee}</span></div>
+${k.off||k.c?.t==='ship'?`<div><span>Coupon: ${k.c.l}</span><span>−₹${k.off}</span></div>`:''}${k.wal?`<div><span>Late-order credit used</span><span>−₹${k.wal}</span></div>`:''}
+<div class="g"><span>Total</span><span>₹${k.tot}</span></div>
+<p class="sub" style="margin:8px 0">Promise: delivered in 12 min or you get 25% back.</p>
+<button class="btn" onclick="place()" ${S.order&&!S.order.done?'disabled':''}>${S.order&&!S.order.done?'Finish your current order first':'Place order'}</button></div>`}
+
+function place(){const k=calc();if(!k.items.length)return;
+const id='NC'+Math.floor(1000+Math.random()*9000);
+S.order={id,items:k.items.map(i=>i.q+'× '+i.p.n),total:k.tot,t:0,dist:3.2,eta:12,done:false,late:false,credit:0,chat:[{w:'them',m:'Hi! I\'m Ravi. I\'ll pick up your order shortly.'}],tipped:0,rated:false};
+S.items=k.items.map(i=>({id:i.p.id,q:i.q}));
+if(k.c)S.coupons=S.coupons.filter(x=>x.id!==k.c.id);S.wallet-=k.wal;S.pick='';S.cart={};save();go('track');start()}
+function start(){clearInterval(timer);if(!S.order||S.order.done)return;timer=setInterval(tick,1000)}
+function tick(){const o=S.order;o.t++;o.dist=Math.max(0,+(o.dist-(o.t<3?0:slow?0.08:0.28)).toFixed(2));
+if(o.t>o.eta)o.late=true;
+if(o.dist<=0){o.done=true;clearInterval(timer);S.done++;
+if(o.late){o.credit=Math.round(o.total*0.25);S.wallet+=o.credit}
+(S.items||[]).forEach(i=>{const p=P.find(x=>x.id===i.id);p.q=Math.max(0,p.q-i.q)});}
+save();if(!$('track').classList.contains('hide'))rTrack();}
+function status(o){return o.done?'Delivered':o.t<3?'Store is packing':o.dist<0.6?'Arriving now':'On the way'}
+function rTrack(){const o=S.order;
+if(!o){$('trackBody').innerHTML='<div class="card">No active order. Place one from your cart to see live tracking.</div>';return}
+const pr=Math.min(1,1-o.dist/3.2),x=30+pr*340,y=110-Math.sin(pr*Math.PI)*60;
+const left=Math.max(0,o.eta-o.t);
+$('trackBody').innerHTML=`<div class="card"><div class="row"><b>Order ${o.id}</b><span class="tag ${o.late&&!o.done?'late':''}">${status(o)}</span></div>
+<svg viewBox="0 0 400 150" width="100%" role="img" aria-label="Delivery partner is ${o.dist} km away"><path d="M30 110 Q200 10 370 110" fill="none" stroke="var(--line)" stroke-width="5" stroke-dasharray="8 6"/>
+<text x="8" y="132">Store</text><text x="344" y="132">You</text><circle cx="${x}" cy="${y}" r="11" fill="var(--sun)" stroke="var(--ink)" stroke-width="2"/><text x="${x-6}" y="${y+4}">🛵</text></svg>
+<div class="row"><div><b style="font-size:26px">${o.dist.toFixed(1)} km</b> away</div><div>${o.done?(o.late?'Arrived late':'On time'):o.late?'<b style="color:var(--red)">Running late</b>':left+' min left'}</div></div>
+<small style="color:var(--mute)">${o.items.join(', ')}</small>
+${o.late&&!o.done?'<p><span class="tag late">Late</span> This order is past its promised time. 25% off will be credited when it arrives.</p>':''}
+${o.done&&o.late?`<p><span class="tag">25% late credit</span> ₹${o.credit} added to your wallet for the next order.</p>`:''}</div>
+<div class="card"><div class="row"><div><b>🛵 Ravi K.</b> · ⭐ 4.8<br><small style="color:var(--mute)">Delivery partner · 1,240 deliveries</small></div><a class="btn" href="tel:+910000000000" style="text-decoration:none">Call</a></div>
+<div class="chat" id="chat">${o.chat.map(c=>`<div class="m ${c.w==='me'?'me':'them'}">${c.m}</div>`).join('')}</div>
+<div class="chips"><button class="chip" onclick="msg('Order ${o.id}: ${o.items.join(', ').replace(/'/g,'')}. Total ₹${o.total}.')">Share order details</button><button class="chip" onclick="msg('Please call at the gate.')">Call at the gate</button><button class="chip" onclick="msg('Leave it with the guard.')">Leave with guard</button></div>
+<div class="row"><input id="mi" placeholder="Message your partner" aria-label="Message"><button class="btn" onclick="msg($('mi').value)">Send</button></div></div>
+${o.done?tipUI(o):`<button class="btn alt" onclick="slow=!slow;rTrack()">Demo: ${slow?'partner is slow (late) – click for normal':'make the partner slow to see the 25% offer'}</button>`}`;
+const c=$('chat');if(c)c.scrollTop=1e5}
+function msg(t){t=(t||'').trim();if(!t||!S.order)return;S.order.chat.push({w:'me',m:t.replace(/</g,'&lt;')});save();rTrack();
+setTimeout(()=>{S.order.chat.push({w:'them',m:'Got it, thanks!'});save();if(!$('track').classList.contains('hide'))rTrack()},900)}
+function tipUI(o){return o.rated?`<div class="card"><b>Thanks! Your tip of ₹${o.tipped} and review are saved.</b></div>`:`<div class="card"><h2>Tip &amp; rate Ravi</h2>
+<div class="chips">${[0,20,30,50].map(t=>`<button class="chip ${o.tipSel===t?'on':''}" onclick="S.order.tipSel=${t};rTrack()">${t?'₹'+t:'No tip'}</button>`).join('')}</div>
+<div class="stars" id="st">${[1,2,3,4,5].map(n=>`<button class="${(o.star||0)>=n?'on':''}" aria-label="${n} stars" onclick="S.order.star=${n};rTrack()">★</button>`).join('')}</div>
+<textarea id="rv" rows="2" placeholder="How was the delivery and the store?"></textarea><br><br>
+<button class="btn" onclick="submitRv()">Send tip &amp; review</button></div>`}
+function submitRv(){const o=S.order;if(!o.star){alert('Choose a star rating first.');return}
+o.tipped=o.tipSel||0;o.rated=true;S.reviews.unshift({n:'You',r:o.star,t:$('rv').value||'No comment.',d:'Ravi K.',tip:o.tipped});save();rTrack()}
+
+function rRewards(){const n=S.done%5,earned=Math.floor(S.done/5)-S.spins;
+$('rwTxt').textContent=earned>0?'Lucky draw unlocked!':'Orders toward your next lucky draw';
+$('rwNum').textContent=(earned>0?5:n)+' / 5';$('rwBar').style.width=(earned>0?100:n*20)+'%';
+$('spinBtn').disabled=earned<=0;
+$('spinMsg').textContent=earned>0?'You have '+earned+' spin(s) waiting.':'Place '+(5-n)+' more order(s) to unlock a spin. Total orders: '+S.done+'.';
+$('wheel').innerHTML=PRIZES.map((p,i)=>`<span style="transform:rotate(${i*60+30}deg)">${p.l}</span>`).join('');
+$('coupList').innerHTML=S.coupons.length?S.coupons.map(c=>`<div class="row"><span class="tag">${c.l}</span><span>Use at checkout</span></div>`).join('<br>'):'<span style="color:var(--mute)">No coupons yet. Win one on the wheel.</span>'}
+let rot=0;
+function spin(){if(Math.floor(S.done/5)-S.spins<=0)return;$('spinBtn').disabled=true;
+const i=Math.floor(Math.random()*PRIZES.length);rot+=1800+(360-(i*60+30))-(rot%360);
+$('wheel').style.transform=`rotate(${rot}deg)`;
+setTimeout(()=>{const p=PRIZES[i];S.spins++;S.coupons.push({id:'c'+Date.now(),l:p.l+' on next order',t:p.t,v:p.v});save();
+$('spinMsg').innerHTML='<b>You won '+p.l+'!</b> It is saved in your coupons.';rRewards2()},4100)}
+function rRewards2(){const m=$('spinMsg').innerHTML;rRewards();$('spinMsg').innerHTML=m}
+
+function rRev(){$('revList').innerHTML=S.reviews.map(r=>`<div class="card"><div class="row"><b>${r.n}</b><span style="color:var(--sun);font-size:18px">${'★'.repeat(r.r)}${'☆'.repeat(5-r.r)}</span></div><p style="margin:4px 0">${r.t}</p><small style="color:var(--mute)">Delivery partner: ${r.d}${r.tip?' · Tip ₹'+r.tip:''}</small></div>`).join('')}
+
+rShop();go('shop');if(S.order&&!S.order.done)start();
+</script></body></html>
